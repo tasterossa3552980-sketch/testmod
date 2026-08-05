@@ -1,5 +1,5 @@
 {
-  "parent": "item/generated",
+  "parent": "builtin/entity",
   "gecko_item_renderer": true,
   "textures": {
     "layer0": "testmod:item/big_dog"
