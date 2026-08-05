@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"tag": "minecraft:planks"},
+    {"tag": "minecraft:planks"},
+    {"item": "minecraft:cobblestone"}
+  ],
+  "result": {
+    "item": "testmod:first",
+    "count": 1
+  }
+}
