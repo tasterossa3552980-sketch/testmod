@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "gecko_item_renderer": true,
+  "textures": {
+    "layer0": "testmod:item/big_dog"
+  }
+}

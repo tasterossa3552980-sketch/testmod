@@ -22,6 +22,7 @@ public class ModItemTab {
                     .displayItems((parameters,output)->{
                         output.accept(new ItemStack(itemRegisters.first.get()));
                         output.accept(new ItemStack(itemRegisters.FIRST_SWORD.get()));
+                        output.accept(new ItemStack(itemRegisters.big_dog.get()));
                     })
                     .build()
 

@@ -20,6 +20,9 @@ public class itemRegisters {
     public static final RegistryObject<Item> first = ITEMS.register("first",
             () -> new first(new Item.Properties().durability(64)));
 
+    public static final RegistryObject<Item> big_dog =ITEMS.register("big_dog",
+            ()->new bigDog(new Item.Properties().durability(256)));
+
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
     }
