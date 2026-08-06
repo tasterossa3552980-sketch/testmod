@@ -154,7 +154,7 @@ public class bigDog extends Item implements GeoItem {
             int charge = this.getUseDuration(itemstack) - i;
             // =================【🎯 2b. 核心公式：根據蓄力時間動態計算長度】=================
             // 設定蓄力完全滿（80刻）時的最大光束長度（格數）
-            double maxBeamLength = 300.0;
+            double maxBeamLength = 50;
 
             // 計算蓄力進度：0.0 (剛開始) 到 1.0 (蓄滿 80 刻)
             float chargeProgress = Math.min((float) charge / 80.0F, 1.0F);
@@ -225,12 +225,31 @@ public class bigDog extends Item implements GeoItem {
 
                             // 施加傷害
                             if (target.hurt(damageSource, calculatedDamage)) {
-                                // 🔥 附加特殊效果：讓被雷射掃到的怪物著火（蓄力越久燃燒越久，最大 5 秒）
-                                target.setSecondsOnFire((int) (2 + chargeProgress * 3));
+                                // 🕸️ 附加特殊效果：給予怪物緩速效果（蓄力越久，減速時間越長、等級越強）
+                                // 20 ticks = 1秒。基礎 3 秒，蓄滿 4 秒放開時最大可緩速 8 秒 (160 ticks)
+                                int slowDurationTicks = (int) ((3.0F + chargeProgress * 5.0F) * 20.0F);
+
+                                // 🌟 動態計算緩速等級 (Amplifier)：
+                                // 0 代表緩速 I (減速 15%)，1 代表緩速 II (減速 30%)
+                                // 如果玩家蓄力超過 75% 以上放開，直接給予超級緩速 III (等級填 2，減速 45%，怪物幾乎定在原地)
+                                int slowAmplifier = 0;
+                                if (chargeProgress >= 0.75F) {
+                                    slowAmplifier = 2; // 緩速 III
+                                } else if (chargeProgress >= 0.4F) {
+                                    slowAmplifier = 1; // 緩速 II
+                                }
+
+                                // 施加緩速藥水效果
+                                target.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                                        net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN,
+                                        slowDurationTicks,//tick 數字
+                                        slowAmplifier,//等級
+                                        false, true, true
+                                ));
 
                                 // 🌀 強力物理擊退計算
                                 // 計算擊退方向向量（玩家看向的方向），微幅往上飄（y + 0.15F）會讓擊退拋物線更帥氣
-                                net.minecraft.world.phys.Vec3 knockbackDir = new net.minecraft.world.phys.Vec3(lookVec.x, lookVec.y + 0.15, lookVec.z).normalize();
+                                net.minecraft.world.phys.Vec3 knockbackDir = new net.minecraft.world.phys.Vec3(lookVec.x, lookVec.y + 0.5, lookVec.z).normalize();
 
                                 // 擊退強度：基礎 0.5，蓄滿最大 1.8（可以把怪物轟飛高空並向後噴出十幾格遠）
                                 double knockbackStrength = 0.5 + (chargeProgress * 1.3);
