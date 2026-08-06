@@ -1,38 +1,92 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.dog.angry": {
-			"loop": true,
+		"animation.big_dog.charge": {
+			"loop": "hold_on_last_frame",
 			"animation_length": 1.5,
 			"bones": {
 				"tail": {
+					"relative_to": {
+						"rotation": "entity"
+					},
 					"rotation": {
 						"0.0": [-2.5, "query.is_angry ? -this : (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed * 80.22 - this)", 0],
 						"1.5": [87.5, "query.is_angry ? -this : (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed * 80.22 - this)", 0]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"1.5": [0, 0, 0]
 					}
 				},
 				"leg0": {
-					"rotation": [90, 0, 0]
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [90, 0, 0],
+					"position": [0, 0, 0]
 				},
 				"leg1": {
-					"rotation": [90, 0, 0]
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [90, 0, 0],
+					"position": [0, 0, 0]
 				},
 				"leg2": {
+					"relative_to": {
+						"rotation": "entity"
+					},
 					"rotation": {
-						"0.0": [0, 0, 0],
+						"0.0": [0, 0, 0.01],
 						"1.5": [-24.4775, 5.2482, 11.3607]
-					}
+					},
+					"position": [0, 0, 0]
 				},
 				"leg3": {
+					"relative_to": {
+						"rotation": "entity"
+					},
 					"rotation": {
-						"0.0": [0, 0, 0],
+						"0.0": [0, 0, 0.01],
 						"1.5": [-23.9759, -7.301, -15.9476]
-					}
+					},
+					"position": [0, 0, 0]
 				},
 				"mouth": {
+					"relative_to": {
+						"rotation": "entity"
+					},
 					"rotation": {
-						"0.0": [0, 0, 0],
+						"0.0": [0, 0, 0.01],
 						"1.5": [37.5, 0, 0]
+					},
+					"position": [0, 0, 0]
+				},
+				"head": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"body": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"upperBody": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"main": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"1.5": [0, 0, 6]
 					}
 				}
 			}
@@ -77,7 +131,7 @@
 				"body": {
 					"rotation": [0, 0, "variable.body_rot_z - this"]
 				},
-				"upperBody": {
+				"upperbody": {
 					"rotation": [0, 0, "variable.upper_body_rot_z - this"]
 				}
 			}
