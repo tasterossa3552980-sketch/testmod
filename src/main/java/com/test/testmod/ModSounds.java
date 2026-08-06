@@ -14,9 +14,10 @@ public class ModSounds {
 
     public static final RegistryObject<SoundEvent> first =Sound.register(
             "first",()-> SoundEvent.createVariableRangeEvent(new ResourceLocation("testmod","first"))
-
-
     );
+    public static final RegistryObject<SoundEvent>  BIG_DOG_CHARGE =
+            Sound.register("big_dog_charge", () ->
+                    SoundEvent.createVariableRangeEvent(new ResourceLocation("testmod", "big_dog_charge")));
     public static void register(IEventBus bus) {
         Sound.register(bus);
     }

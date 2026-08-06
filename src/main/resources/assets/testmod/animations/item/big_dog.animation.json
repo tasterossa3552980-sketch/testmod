@@ -197,79 +197,82 @@
 				}
 			}
 		},
-		"animation.dog.head_rot_z": {
-			"loop": true,
+		"animation.big_dog.atk": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1.5,
 			"bones": {
-				"head": {
-					"rotation": [0, 0, "(query.is_interested ? (query.head_roll_angle * 57.3) : 0) + (query.is_shaking_wetness ? variable.head_rot_z : 0) - this"]
-				}
-			}
-		},
-		"animation.dog.leg_default": {
-			"loop": true,
-			"bones": {
-				"leg0": {
-					"rotation": ["math.cos(query.modified_distance_moved * 38.17) * 80.22 * query.modified_move_speed - this", 0, 0]
-				},
-				"leg1": {
-					"rotation": ["math.cos(query.modified_distance_moved * 38.17 + 180) * 80.22 * query.modified_move_speed - this", 0, 0]
-				},
-				"leg2": {
-					"rotation": ["math.cos(query.modified_distance_moved * 38.17 + 180) * 80.22 * query.modified_move_speed - this", 0, 0]
-				},
-				"leg3": {
-					"rotation": ["math.cos(query.modified_distance_moved * 38.17) * 80.22 * query.modified_move_speed - this", 0, 0]
-				}
-			}
-		},
-		"animation.dog.shaking": {
-			"loop": true,
-			"bones": {
-				"body": {
-					"rotation": [0, 0, "variable.body_rot_z - this"]
-				},
-				"upperbody": {
-					"rotation": [0, 0, "variable.upper_body_rot_z - this"]
-				}
-			}
-		},
-		"animation.dog.sitting": {
-			"loop": true,
-			"bones": {
-				"body": {
-					"rotation": [-45, 0, 0],
-					"position": [0, -4, -2]
-				},
-				"leg0": {
-					"rotation": [270, 0, 0],
-					"position": [0, -7, -5]
-				},
-				"leg1": {
-					"rotation": [270, 0, 0],
-					"position": [0, -7, -5]
-				},
-				"leg2": {
-					"rotation": [333, 0, 0],
-					"position": [0.01, -1, 0]
-				},
-				"leg3": {
-					"rotation": [333, 0, 0],
-					"position": [0.01, -1, 0]
-				},
 				"tail": {
-					"position": [0, -9, -2]
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [87.5, "query.is_angry ? -this : (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed * 80.22 - this)", 0],
+					"position": [0, 0, 0]
+				},
+				"leg0": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"leg1": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"leg2": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [-24.4775, 5.2482, 11.3607],
+					"position": [0, 0, 0]
+				},
+				"leg3": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [-23.9759, -7.301, -15.9476],
+					"position": [0, 0, 0]
+				},
+				"mouth": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [37.5, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"head": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"body": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
 				},
 				"upperBody": {
-					"rotation": [-18, 0, 0],
-					"position": [0, -2, 0]
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"main": {
+					"rotation": [0, -10, 0],
+					"position": [0, 2, 8]
 				}
-			}
-		},
-		"animation.dog.tail_default": {
-			"loop": true,
-			"bones": {
-				"tail": {
-					"rotation": ["query.tail_angle * 57.3 - this", 0, "variable.tail_rot_z - this"]
+			},
+			"particle_effects": {
+				"0.0": {
+					"effect": "breaking_item_icon",
+					"locator": "locator"
 				}
 			}
 		}

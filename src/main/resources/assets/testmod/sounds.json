@@ -3,5 +3,13 @@
     "sounds": [
       "testmod:first"
     ]
+  },
+  "big_dog_charge": {
+    "category": "player",
+    "sounds": [
+      {"name":"testmod:big_dog_charge",
+        "stream": true
+      }
+    ]
   }
 }
