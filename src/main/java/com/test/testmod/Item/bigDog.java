@@ -240,7 +240,7 @@ public class bigDog extends Item implements GeoItem {
                             hitEntities.add(target.getUUID()); // 標記為已擊中
 
                             // 💥 傷害計算：基礎 6 點傷害（3顆心），蓄滿 80 刻（4秒）會乘以 3.5 倍 ➔ 最大 21 點傷害（10.5顆心，一擊必殺小殭屍）
-                            float calculatedDamage = 6.0F * (1.0F + chargeProgress * 2.5F);
+                            float calculatedDamage = 10.0F * (1.0F + chargeProgress * 3.5F);
 
                             // 取得玩家的基礎傷害源（這能確保擊殺訊息顯示為玩家的功勞）
                             net.minecraft.world.damagesource.DamageSource damageSource = level.damageSources().playerAttack(p);
