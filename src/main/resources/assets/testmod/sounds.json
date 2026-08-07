@@ -19,5 +19,13 @@
         "stream": true
       }
     ]
+  },
+  "big_dog_noOwl": {
+    "category": "player",
+    "sounds": [
+      {"name":"testmod:big_dog_noOwl",
+        "stream": true
+      }
+    ]
   }
 }

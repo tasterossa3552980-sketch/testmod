@@ -165,16 +165,24 @@ public class bigDog extends Item implements GeoItem {
     public void releaseUsing(ItemStack itemstack, Level level, LivingEntity livingEntity, int i) {
         if (livingEntity instanceof Player p) {
             // 計算玩家實際蓄力的時間 (1秒 = 20 ticks)
+            int maxEffect = 100;
             int charge = this.getUseDuration(itemstack) - i;
             // =================【🎯 2b. 核心公式：根據蓄力時間動態計算長度】=================
             // 設定蓄力完全滿（80刻）時的最大光束長度（格數）
             double maxBeamLength = 50;
 
             // 計算蓄力進度：0.0 (剛開始) 到 1.0 (蓄滿 80 刻)
-            float chargeProgress = Math.min((float) charge / 80.0F, 1.0F);
+            float chargeProgress = Math.min((float) charge / 100.0F, 1.0F);
 
             // 🌟 最終光束長度 = 最大長度 * 蓄力進度 (例如：蓄力一半就是 25 格)
             double beamLength = maxBeamLength * chargeProgress;
+            if(chargeProgress > 0.4){
+                level.playSound(p,p.getX(), p.getY(), p.getZ(),
+                        ModSounds.BIG_DOG_OWL.get(), SoundSource.PLAYERS, 1.0F, 1.0f);
+            }else{
+                level.playSound(p,p.getX(), p.getY(), p.getZ(),
+                        ModSounds.BIG_DOG_noOWL.get(), SoundSource.PLAYERS, 1.0F, 1.0f);
+            }
 
             // ================= 【1. 伺服器端邏輯】 =================
             if (!level.isClientSide() && charge >= 40) {
@@ -188,12 +196,8 @@ public class bigDog extends Item implements GeoItem {
                     // 觸發 GeckoLib 動畫
                     this.triggerAnim(p,
                             GeoItem.getOrAssignId(itemstack, (net.minecraft.server.level.ServerLevel) level),
-                            "return", "animation.big_dog.return"
+                            "return", "animation.big_dog_return"
                     );
-                    level.playSound(p,p.getX(), p.getY(), p.getZ(),
-                            ModSounds.BIG_DOG_OWL.get(), SoundSource.PLAYERS, 0.5F, 1.0f);
-                }else{
-
                 }
 
                 // 射線掃描與 3x3 方塊破壞
