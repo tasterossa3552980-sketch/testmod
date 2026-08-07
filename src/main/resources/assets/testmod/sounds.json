@@ -11,5 +11,13 @@
         "stream": true
       }
     ]
+  },
+  "big_dog_owl": {
+    "category": "player",
+    "sounds": [
+      {"name":"testmod:big_dog_owl",
+        "stream": true
+      }
+    ]
   }
 }

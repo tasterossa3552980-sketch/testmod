@@ -26,11 +26,14 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class bigDog extends Item implements GeoItem {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private final Map<Player, Integer> lastSoundTick = new HashMap<>();
     public bigDog(Properties properties) {
         super(properties);
         SingletonGeoAnimatable.registerSyncedAnimatable(this);
@@ -88,9 +91,20 @@ public class bigDog extends Item implements GeoItem {
             int usedTicks = this.getUseDuration(stack) - remainingUseTicks;
 
             // 蓄力進度：0.0(剛開始) ~ 1.0(蓄滿)
-            float progress = Math.min(usedTicks / (float) this.getUseDuration(stack), 1.0F);
+            int maxEffect = 100;
+            float progress = Math.min(usedTicks / (float)maxEffect, 1.0F);
 
             spawnChargeParticles(level, p, progress);
+
+
+            int soundIntervalTicks = (int)(20*((1- progress))) +10;
+            int lastTick = lastSoundTick.getOrDefault(p, -999);
+
+            if(usedTicks - lastTick >= soundIntervalTicks){
+                float pitch = 0.8f+(progress*1.2f);
+                level.playSound(p,p.getX(), p.getY(), p.getZ(),
+                        ModSounds.BIG_DOG_CHARGE.get(), SoundSource.PLAYERS, 0.5F, pitch);
+            }
         }
     }
 
@@ -176,6 +190,10 @@ public class bigDog extends Item implements GeoItem {
                             GeoItem.getOrAssignId(itemstack, (net.minecraft.server.level.ServerLevel) level),
                             "return", "animation.big_dog.return"
                     );
+                    level.playSound(p,p.getX(), p.getY(), p.getZ(),
+                            ModSounds.BIG_DOG_OWL.get(), SoundSource.PLAYERS, 0.5F, 1.0f);
+                }else{
+
                 }
 
                 // 射線掃描與 3x3 方塊破壞
