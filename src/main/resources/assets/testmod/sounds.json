@@ -20,10 +20,10 @@
       }
     ]
   },
-  "big_dog_noOwl": {
+  "big_dog_noowl": {
     "category": "player",
     "sounds": [
-      {"name":"testmod:big_dog_noOwl",
+      {"name":"testmod:big_dog_noowl",
         "stream": true
       }
     ]

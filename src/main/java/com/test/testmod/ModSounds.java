@@ -22,8 +22,8 @@ public class ModSounds {
             Sound.register("big_dog_owl", () ->
                     SoundEvent.createVariableRangeEvent(new ResourceLocation("testmod", "big_dog_owl")));
     public static final RegistryObject<SoundEvent> BIG_DOG_noOWL =
-            Sound.register("big_dog_noOwl", () ->
-                    SoundEvent.createVariableRangeEvent(new ResourceLocation("testmod", "big_dog_noOwl")));
+            Sound.register("big_dog_noowl", () ->
+                    SoundEvent.createVariableRangeEvent(new ResourceLocation("testmod", "big_dog_noowl")));
     public static void register(IEventBus bus) {
         Sound.register(bus);
     }
