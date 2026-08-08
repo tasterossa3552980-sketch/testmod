@@ -7,7 +7,9 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +17,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.apache.http.util.EntityUtils;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -72,8 +75,29 @@ public class bigDog extends Item implements GeoItem {
     public InteractionResultHolder<ItemStack> use (Level level, Player p, InteractionHand hand){
         ItemStack itemstack = p.getItemInHand(hand);
 
+        if(p.isShiftKeyDown()){
+            if(!level.isClientSide){
+                Wolf wolf = EntityType.WOLF.create(level);
+                if(wolf != null){
+                    wolf.moveTo(p.getX(), p.getY(), p.getZ(), 0.0F, 0.0F);
+                    wolf.setTame(true);
+                    wolf.setOwnerUUID(p.getUUID());
+
+                    if(itemstack.hasCustomHoverName()){
+                        wolf.setCustomName(itemstack.getHoverName());
+
+
+                    }
+                    level.addFreshEntity(wolf);
+                }
+                itemstack.shrink(1);
+            }
+            return InteractionResultHolder.sidedSuccess(itemstack, p.isShiftKeyDown());
+        }
+
         itemstack.getOrCreateTag().putBoolean("charge", true);
         p.startUsingItem(hand);
+
         return InteractionResultHolder.consume(itemstack);
     }
 
@@ -179,21 +203,20 @@ public class bigDog extends Item implements GeoItem {
             // 計算蓄力進度：0.0 (剛開始) 到 1.0 (蓄滿 80 刻)
             float chargeProgress = Math.min((float) charge / 100.0F, 1.0F);
 
-            double knockbackStrengthPlayer = 0.8 * chargeProgress;   // 蓄力越滿，後座力越強
+            double knockbackStrengthPlayer = 2.5 * chargeProgress;   // 蓄力越滿，後座力越強
             Vec3 lookDirection = p.getLookAngle();
 
             p.setDeltaMovement(
                     p.getDeltaMovement().x - lookDirection.x * knockbackStrengthPlayer,
-                    p.getDeltaMovement().y + 0.1,   // 稍微往上一點點，避免整個人貼在地上滑
+                    p.getDeltaMovement().y + 0.2,   // 稍微往上一點點，避免整個人貼在地上滑
                     p.getDeltaMovement().z - lookDirection.z * knockbackStrengthPlayer
             );
 
             // 🌟 最終光束長度 = 最大長度 * 蓄力進度 (例如：蓄力一半就是 25 格)
             double beamLength = maxBeamLength * chargeProgress;
-            if(!level.isClientSide()&&charge > 40){
+            if(!level.isClientSide()&&charge >= 40){
                 level.playSound(null,p.getX(), p.getY(), p.getZ(),
                         ModSounds.BIG_DOG_OWL.get(), SoundSource.PLAYERS, 1.0F, 1.0f);
-                // 後座力：往玩家「面朝方向」的反方向推
 
             }else{
                 level.playSound(null,p.getX(), p.getY(), p.getZ(),
