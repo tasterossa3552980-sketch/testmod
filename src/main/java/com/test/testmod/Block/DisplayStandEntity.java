@@ -7,18 +7,17 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animation.AnimationController;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class DisplayBlockEntity extends BlockEntity implements GeoBlockEntity {
+public class DisplayStandEntity extends BlockEntity implements GeoBlockEntity {
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private ItemStack displayedItem = ItemStack.EMPTY;
 
-    public DisplayBlockEntity(BlockPos pos, BlockState state) {
+    public DisplayStandEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.DISPLAY_BLOCK_ENTITY.get(), pos, state);
     }
 
@@ -55,4 +54,5 @@ public class DisplayBlockEntity extends BlockEntity implements GeoBlockEntity {
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
     }
+
 }

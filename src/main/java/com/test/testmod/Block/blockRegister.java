@@ -18,13 +18,15 @@ public class blockRegister {
     public static final DeferredRegister<Item> BLOCK_ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, "testmod");
 
-    public static final RegistryObject<Block> DISPLAY_BLOCK = BLOCKS.register("display_block",
+    public static final RegistryObject<Block> DISPLAY_BLOCK = BLOCKS.register("display_stand",
             () -> new displayStand(BlockBehaviour.Properties.of()
                     .mapColor(MapColor.STONE)
                     .strength(3.0F)
                     .noOcclusion()));
+    // 在 blockRegister.java 中修改：
     public static final RegistryObject<Item> DISPLAY_BLOCK_ITEM = BLOCK_ITEMS.register("display_stand",
-            () -> new BlockItem(DISPLAY_BLOCK.get(), new Item.Properties()));
+            () -> new net.minecraft.world.item.BlockItem(DISPLAY_BLOCK.get(), new Item.Properties()));
+
 
     public static void register(IEventBus bus) {
         BLOCKS.register(bus);
