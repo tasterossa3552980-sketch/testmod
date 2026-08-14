@@ -1,0 +1,280 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.big_dog.charge": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 5,
+			"bones": {
+				"tail": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [-2.5, "query.is_angry ? -this : (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed * 80.22 - this)", 0],
+						"4.6": [87.5, "query.is_angry ? -this : (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed * 80.22 - this)", 0]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"4.6": [0, 0, 0]
+					}
+				},
+				"leg0": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [0, 0, 0.01],
+						"5.0": [90, 0, 0]
+					},
+					"position": [0, 0, 0]
+				},
+				"leg1": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [2.5, 0, 0],
+						"5.0": [90, 0, 0]
+					},
+					"position": [0, 0, 0]
+				},
+				"leg2": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [0, 0, 0.01],
+						"4.6": [-24.4775, 5.2482, 11.3607]
+					},
+					"position": [0, 0, 0]
+				},
+				"leg3": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [0, 0, 0.01],
+						"4.6": [-23.9759, -7.301, -15.9476]
+					},
+					"position": [0, 0, 0]
+				},
+				"mouth": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [0, 0, 0.01],
+						"4.6": [37.5, 0, 0]
+					}
+				},
+				"head": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"body": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"upperBody": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"main": {
+					"rotation": [0, -10, 0],
+					"position": {
+						"0.0": [0, 2, 0],
+						"5.0": [0, 2, 8]
+					}
+				}
+			}
+		},
+		"animation.big_dog.return": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1.5,
+			"bones": {
+				"tail": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [87.5, "query.is_angry ? -this : (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed * 80.22 - this)", 0],
+						"1.5": [-2.5, "query.is_angry ? -this : (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed * 80.22 - this)", 0]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"1.5": [0, 0, 0]
+					}
+				},
+				"leg0": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [0, 0, 0.01],
+						"1.5": [2.5, 0, 0]
+					},
+					"position": [0, 0, 0]
+				},
+				"leg1": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [0, 0, 0.01],
+						"1.5": [2.5, 0, 0]
+					},
+					"position": [0, 0, 0]
+				},
+				"leg2": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [-24.4775, 5.2482, 11.3607],
+						"1.5": [0, 0, 0.01]
+					},
+					"position": [0, 0, 0]
+				},
+				"leg3": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [-23.9759, -7.301, -15.9476],
+						"1.5": [0, 0, 0.01]
+					},
+					"position": [0, 0, 0]
+				},
+				"mouth": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": {
+						"0.0": [37.5, 0, 0],
+						"1.5": [0, 0, 0.01]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"1.5": [0, 0, 0]
+					}
+				},
+				"head": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"body": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"upperBody": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"main": {
+					"rotation": [0, -10, 0],
+					"position": {
+						"0.0": [0, 2, 8],
+						"1.5": [0, 2, 0]
+					}
+				}
+			}
+		},
+		"animation.big_dog.atk": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1.5,
+			"bones": {
+				"tail": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [87.5, "query.is_angry ? -this : (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed * 80.22 - this)", 0],
+					"position": [0, 0, 0]
+				},
+				"leg0": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"leg1": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"leg2": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [-24.4775, 5.2482, 11.3607],
+					"position": [0, 0, 0]
+				},
+				"leg3": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [-23.9759, -7.301, -15.9476],
+					"position": [0, 0, 0]
+				},
+				"mouth": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [37.5, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"head": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"body": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"upperBody": {
+					"relative_to": {
+						"rotation": "entity"
+					},
+					"rotation": [0, 0, 0.01],
+					"position": [0, 0, 0]
+				},
+				"main": {
+					"rotation": [0, -10, 0],
+					"position": [0, 2, 8]
+				}
+			},
+			"particle_effects": {
+				"0.0": {
+					"effect": "breaking_item_icon",
+					"locator": "locator"
+				}
+			}
+		}
+	}
+}

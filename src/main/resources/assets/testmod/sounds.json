@@ -1,0 +1,31 @@
+{
+  "first": {
+    "sounds": [
+      "testmod:first"
+    ]
+  },
+  "big_dog_charge": {
+    "category": "player",
+    "sounds": [
+      {"name":"testmod:big_dog_charge",
+        "stream": true
+      }
+    ]
+  },
+  "big_dog_owl": {
+    "category": "player",
+    "sounds": [
+      {"name":"testmod:big_dog_owl",
+        "stream": true
+      }
+    ]
+  },
+  "big_dog_noowl": {
+    "category": "player",
+    "sounds": [
+      {"name":"testmod:big_dog_noowl",
+        "stream": true
+      }
+    ]
+  }
+}
