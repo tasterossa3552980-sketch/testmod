@@ -46,13 +46,11 @@ public class displayStand extends Block implements EntityBlock {
                 toDisplay.setCount(1);
                 blockEntity.setDisplayedItem(toDisplay);
                 heldItem.shrink(1);
-                return InteractionResult.SUCCESS;
 
             } else if (!displayed.isEmpty()) {
                 // 展示台上已經有東西 → 拿回來
                 player.getInventory().add(displayed.copy());
                 blockEntity.setDisplayedItem(ItemStack.EMPTY);
-                return InteractionResult.SUCCESS;
             }
         }
 
