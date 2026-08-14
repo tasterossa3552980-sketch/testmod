@@ -203,12 +203,12 @@ public class bigDog extends Item implements GeoItem {
             // 計算蓄力進度：0.0 (剛開始) 到 1.0 (蓄滿 80 刻)
             float chargeProgress = Math.min((float) charge / 100.0F, 1.0F);
 
-            double knockbackStrengthPlayer = 2.5 * chargeProgress;   // 蓄力越滿，後座力越強
+            double knockbackStrengthPlayer = Math.max(0.00001,3.5 * (chargeProgress-0.4));   // 蓄力越滿，後座力越強
             Vec3 lookDirection = p.getLookAngle();
 
             p.setDeltaMovement(
                     p.getDeltaMovement().x - lookDirection.x * knockbackStrengthPlayer,
-                    p.getDeltaMovement().y + 0.2,   // 稍微往上一點點，避免整個人貼在地上滑
+                    p.getDeltaMovement().y + Math.max(0.00001,0.5*(chargeProgress-0.4)),   // 稍微往上一點點，避免整個人貼在地上滑
                     p.getDeltaMovement().z - lookDirection.z * knockbackStrengthPlayer
             );
 
@@ -230,15 +230,8 @@ public class bigDog extends Item implements GeoItem {
                     itemstack.getTag().putBoolean("charge", false);
                 }
 
-                // 只有蓄力滿 80 Ticks (4秒) 的時候才觸發後續動作
-                if (charge >= 40) {
-                    // 觸發 GeckoLib 動畫
-                    this.triggerAnim(p,
-                            GeoItem.getOrAssignId(itemstack, (net.minecraft.server.level.ServerLevel) level),
-                            "return", "animation.big_dog_return"
-                    );
-                    p.getCooldowns().addCooldown(this, 60);
-                }
+                p.getCooldowns().addCooldown(this, 60);
+                
 
                 // 射線掃描與 3x3 方塊破壞
                 net.minecraft.world.phys.Vec3 lookVec = p.getLookAngle();

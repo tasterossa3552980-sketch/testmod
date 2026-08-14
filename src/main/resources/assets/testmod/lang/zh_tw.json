@@ -1,5 +1,6 @@
 {
   "item.testmod.first" : "第一",
   "item.testmod.first_sword": "劍",
-  "item.testmod.big_dog": "大狗"
+  "item.testmod.big_dog": "大狗",
+  "enchantment.testmod.orbit": "環繞"
 }

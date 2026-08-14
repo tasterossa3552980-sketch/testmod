@@ -1,13 +1,21 @@
 package com.test.testmod;
 
+import com.test.testmod.Block.blockRegister;
+import com.test.testmod.Enchantment.enchantmentRegister;
 import com.test.testmod.Item.itemRegisters;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraft.core.registries.Registries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Properties;
 
 
 public class ModItemTab {
@@ -23,6 +31,25 @@ public class ModItemTab {
                         output.accept(new ItemStack(itemRegisters.first.get()));
                         output.accept(new ItemStack(itemRegisters.FIRST_SWORD.get()));
                         output.accept(new ItemStack(itemRegisters.big_dog.get()));
+                        output.accept(new ItemStack(blockRegister.DISPLAY_BLOCK.get()));
+                    })
+                    .build()
+
+    );
+    public static final RegistryObject<CreativeModeTab> TAB02 = ITEM_TEB.register(
+            "item02",
+            ()-> CreativeModeTab.builder()
+                    .title(Component.translatable("item02"))
+                    .icon(()-> {
+                        ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
+                        EnchantedBookItem.addEnchantment(book, new EnchantmentInstance(Enchantments.SILK_TOUCH, 1));
+                        return book;
+                    })
+                    .displayItems((parameters,output)->{
+                        ItemStack orbitBook = new ItemStack(Items.ENCHANTED_BOOK);
+                        EnchantedBookItem.addEnchantment(orbitBook, new EnchantmentInstance(enchantmentRegister.ORBIT.get(), 1));
+                        output.accept(orbitBook);
+
                     })
                     .build()
 
