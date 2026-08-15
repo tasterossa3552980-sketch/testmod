@@ -24,7 +24,6 @@ public class displayStandRender extends GeoBlockRenderer<DisplayStandEntity> {
     public void actuallyRender(PoseStack poseStack, DisplayStandEntity animatable, BakedGeoModel model, RenderType renderType,
                                MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick,
                                int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        System.out.println("actuallyRender 被呼叫了！displayedItem = " + animatable.getDisplayedItem());   // 先加這行
 
         // 先讓官方原本的邏輯，正常畫出底座造型
         super.actuallyRender(poseStack, animatable, model, renderType, bufferSource, buffer, isReRender, partialTick,

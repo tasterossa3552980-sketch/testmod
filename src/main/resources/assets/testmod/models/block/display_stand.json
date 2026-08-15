@@ -1,4 +1,7 @@
 {
-  "parent": "minecraft:block/block"
+  "parent": "minecraft:block/block",
+  "textures": {
+    "particle": "testmod:block/display_stand_particle"
+  }
 
 }
