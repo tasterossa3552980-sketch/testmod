@@ -26,11 +26,13 @@ public class displayStand extends Block implements EntityBlock {
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.ENTITYBLOCK_ANIMATED; // 關鍵：停用 Java 原生方塊渲染
     }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new DisplayStandEntity(pos, state);   // ← 這裡才是呼叫「方塊實體」的建構子
     }
+
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
                                  InteractionHand hand, BlockHitResult hit) {
@@ -54,8 +56,10 @@ public class displayStand extends Block implements EntityBlock {
             }
         }
 
+
         return InteractionResult.CONSUME;
     }
+
 }
 
 

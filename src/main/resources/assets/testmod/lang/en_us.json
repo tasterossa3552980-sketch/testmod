@@ -3,5 +3,6 @@
   "item.testmod.first_sword" : "First Sword",
   "item.testmod.big_dog": "Big Dog",
   "enchantment.testmod.orbit": "orbit",
-  "block.testmod.display_stand": "Display Stand"
+  "block.testmod.display_stand": "Display Stand",
+  "enchantment.testmod.throw": "throw"
 }

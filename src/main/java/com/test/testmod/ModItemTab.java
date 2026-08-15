@@ -47,8 +47,11 @@ public class ModItemTab {
                     })
                     .displayItems((parameters,output)->{
                         ItemStack orbitBook = new ItemStack(Items.ENCHANTED_BOOK);
+                        ItemStack throwBook = new ItemStack(Items.ENCHANTED_BOOK);
                         EnchantedBookItem.addEnchantment(orbitBook, new EnchantmentInstance(enchantmentRegister.ORBIT.get(), 1));
                         output.accept(orbitBook);
+                        EnchantedBookItem.addEnchantment(throwBook, new EnchantmentInstance(enchantmentRegister.THROW.get(), 1));
+                        output.accept(throwBook);
 
                     })
                     .build()

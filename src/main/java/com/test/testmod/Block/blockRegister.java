@@ -25,7 +25,7 @@ public class blockRegister {
                     .noOcclusion()));
     // 在 blockRegister.java 中修改：
     public static final RegistryObject<Item> DISPLAY_BLOCK_ITEM = BLOCK_ITEMS.register("display_stand",
-            () -> new net.minecraft.world.item.BlockItem(DISPLAY_BLOCK.get(), new Item.Properties()));
+            () -> new com.test.testmod.Item.displayStand(DISPLAY_BLOCK.get(), new Item.Properties()));
 
 
     public static void register(IEventBus bus) {

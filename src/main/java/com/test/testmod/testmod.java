@@ -21,6 +21,7 @@ public class testmod {
         ModItemTab.register(bus);
         ModSounds.register(bus);
         blockRegister.register(bus);
+        NetworkHander.register();
     }
 
 }

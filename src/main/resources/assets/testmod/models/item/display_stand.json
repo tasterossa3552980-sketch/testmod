@@ -1,6 +1,7 @@
 {
-	"parent": "minecraft:block/cube_all",
+	"parent": "minecraft:block/cube_column",
 	"textures": {
-		"all": "testmod:item/display_stand"
+		"side": "testmod:item/display_stand_around",
+		"end": "testmod:item/display_stand_up"
 	}
 }

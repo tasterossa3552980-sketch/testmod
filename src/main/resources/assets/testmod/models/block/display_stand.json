@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "particle": "testmod:block/display_stand_particle"
+    "particle": "minecraft:block/quartz_block_side"
   }
 
 }

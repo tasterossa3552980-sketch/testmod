@@ -16,6 +16,10 @@ public class enchantmentRegister {
             "orbit",
             fishRodOrbit::new
     );
+    public static final RegistryObject<Enchantment> THROW = ENCHANTMENTS.register(
+            "throw",
+            fishRodThrow::new
+    );
 
     public static void register(IEventBus bus) {
         ENCHANTMENTS.register(bus);
