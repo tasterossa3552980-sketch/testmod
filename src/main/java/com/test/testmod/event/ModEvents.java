@@ -1,7 +1,7 @@
-package com.test.testmod;
+package com.test.testmod.event;
 
-import com.test.testmod.Enchantment.enchantmentRegister;
-import com.test.testmod.Item.itemRegisters;
+import com.test.testmod.enchantment.enchantmentRegister;
+import com.test.testmod.item.itemRegisters;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Wolf;
@@ -38,8 +38,8 @@ public class ModEvents {
 
         return mainHandValid || offHandValid;
     }
-    static final Map<UUID, Set<UUID>> orbitingEntities = new HashMap<>();
-    static final Map<UUID, UUID> launchedEntities = new HashMap<>();
+    public static final Map<UUID, Set<UUID>> orbitingEntities = new HashMap<>();
+    public static final Map<UUID, UUID> launchedEntities = new HashMap<>();
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         Player p =event.player;
@@ -189,9 +189,9 @@ public class ModEvents {
         }
         event.setCanceled(true);
     }
-    static final Map<UUID, UUID> selectedForLaunch = new HashMap<>();
+    public static final Map<UUID, UUID> selectedForLaunch = new HashMap<>();
 
-    static void selectFirstOrbiter(ServerPlayer p) {
+    public static void selectFirstOrbiter(ServerPlayer p) {
         Set<UUID> myOrbiters = orbitingEntities.get(p.getUUID());
         if (myOrbiters == null || myOrbiters.isEmpty()) return;
 
@@ -200,7 +200,7 @@ public class ModEvents {
         myOrbiters.remove(firstId);   // 從環繞清單移除，避免跟固定位置邏輯打架
     }
 
-    static void launchSelectedEntity(ServerPlayer p) {
+    public static void launchSelectedEntity(ServerPlayer p) {
         UUID selectedId = selectedForLaunch.remove(p.getUUID());
         if (selectedId == null) return;
 
@@ -251,4 +251,3 @@ public class ModEvents {
 
 
 }
-

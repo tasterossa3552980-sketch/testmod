@@ -1,4 +1,4 @@
-package com.test.testmod.Item;
+package com.test.testmod.item;
 
 
 import net.minecraft.world.item.Item;

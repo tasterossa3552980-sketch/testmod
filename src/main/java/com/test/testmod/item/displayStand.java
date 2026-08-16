@@ -1,5 +1,5 @@
 
-package com.test.testmod.Item;
+package com.test.testmod.item;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +18,5 @@ public class displayStand extends BlockItem{
         return true;
     }
 }
-
 
 

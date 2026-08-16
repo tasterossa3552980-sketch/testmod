@@ -1,4 +1,4 @@
-package com.test.testmod.Enchantment;
+package com.test.testmod.enchantment;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;

@@ -1,4 +1,4 @@
-package com.test.testmod;
+package com.test.testmod.registry;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;

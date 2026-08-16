@@ -1,4 +1,4 @@
-package com.test.testmod.Block;
+package com.test.testmod.block;
 
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;

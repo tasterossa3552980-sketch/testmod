@@ -1,6 +1,6 @@
-package com.test.testmod.Item;
+package com.test.testmod.item;
 
-import com.test.testmod.ModSounds;
+import com.test.testmod.registry.ModSounds;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -231,7 +231,7 @@ public class bigDog extends Item implements GeoItem {
                 }
 
                 p.getCooldowns().addCooldown(this, 60);
-                
+
 
                 // 射線掃描與 3x3 方塊破壞
                 net.minecraft.world.phys.Vec3 lookVec = p.getLookAngle();

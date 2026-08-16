@@ -1,5 +1,7 @@
-package com.test.testmod;
+package com.test.testmod.client;
 
+import com.test.testmod.network.LaunchTriggerPacket;
+import com.test.testmod.network.NetworkHander;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

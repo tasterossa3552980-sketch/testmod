@@ -1,4 +1,4 @@
-package com.test.testmod.Block;
+package com.test.testmod.block;
 
 
 import net.minecraft.core.BlockPos;
@@ -61,5 +61,4 @@ public class displayStand extends Block implements EntityBlock {
     }
 
 }
-
 

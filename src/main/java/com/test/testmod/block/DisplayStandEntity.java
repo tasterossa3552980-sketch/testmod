@@ -1,4 +1,4 @@
-package com.test.testmod.Block;
+package com.test.testmod.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

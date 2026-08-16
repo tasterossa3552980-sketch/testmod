@@ -1,13 +1,16 @@
 package com.test.testmod;
 
-import com.test.testmod.Block.ModBlockEntities;
-import com.test.testmod.Block.blockRegister;
-import com.test.testmod.Enchantment.enchantmentRegister;
+import com.test.testmod.block.ModBlockEntities;
+import com.test.testmod.block.blockRegister;
+import com.test.testmod.enchantment.enchantmentRegister;
+import com.test.testmod.network.NetworkHander;
+import com.test.testmod.registry.ModItemTab;
+import com.test.testmod.registry.ModSounds;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import com.test.testmod.Item.itemRegisters;
+import com.test.testmod.item.itemRegisters;
 
 
 

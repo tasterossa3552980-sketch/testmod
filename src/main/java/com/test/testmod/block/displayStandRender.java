@@ -1,4 +1,4 @@
-package com.test.testmod.Block;
+package com.test.testmod.block;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;

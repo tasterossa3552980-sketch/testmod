@@ -1,5 +1,6 @@
-package com.test.testmod;
+package com.test.testmod.network;
 
+import com.test.testmod.event.ModEvents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 

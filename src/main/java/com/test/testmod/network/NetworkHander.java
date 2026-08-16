@@ -1,4 +1,4 @@
-package com.test.testmod;
+package com.test.testmod.network;
 
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;

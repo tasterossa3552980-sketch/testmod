@@ -1,7 +1,7 @@
-package com.test.testmod.Item;
+package com.test.testmod.item;
 
 
-import com.test.testmod.ModSounds;
+import com.test.testmod.registry.ModSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -65,4 +65,3 @@ public class first extends Item {
         return super.hurtEnemy(stack,target,attacker);
     }
 }
-

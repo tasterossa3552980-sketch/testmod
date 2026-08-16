@@ -1,4 +1,4 @@
-package com.test.testmod.Item;
+package com.test.testmod.item;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -27,4 +27,3 @@ public class firstSword extends SwordItem {
 
 
 }
-

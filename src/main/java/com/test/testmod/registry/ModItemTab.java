@@ -1,8 +1,8 @@
-package com.test.testmod;
+package com.test.testmod.registry;
 
-import com.test.testmod.Block.blockRegister;
-import com.test.testmod.Enchantment.enchantmentRegister;
-import com.test.testmod.Item.itemRegisters;
+import com.test.testmod.block.blockRegister;
+import com.test.testmod.enchantment.enchantmentRegister;
+import com.test.testmod.item.itemRegisters;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
