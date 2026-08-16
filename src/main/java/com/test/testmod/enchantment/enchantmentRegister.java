@@ -20,6 +20,10 @@ public class enchantmentRegister {
             "throw",
             fishRodThrow::new
     );
+    public static final RegistryObject<Enchantment> MULTI_HOOK = ENCHANTMENTS.register(
+            "multi_hook",
+            fishRodMultiHook::new
+    );
 
     public static void register(IEventBus bus) {
         ENCHANTMENTS.register(bus);

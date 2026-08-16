@@ -4,5 +4,6 @@
   "item.testmod.big_dog": "大狗",
   "enchantment.testmod.orbit": "環繞",
   "block.testmod.display_stand": "展示台",
-  "key.testmod.throw": "發射收服的生物"
+  "key.testmod.throw": "發射收服的生物",
+  "enchantment.testmod.multi_hook": "多勾"
 }

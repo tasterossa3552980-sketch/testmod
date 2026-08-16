@@ -9,9 +9,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -38,8 +40,26 @@ public class ModEvents {
 
         return mainHandValid || offHandValid;
     }
+    private static boolean isOrbiting(UUID entityId) {
+        for (Set<UUID> orbiters : orbitingEntities.values()) {
+            if (orbiters.contains(entityId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    @SubscribeEvent
+    public static void onOrbitingEntityHurt(LivingHurtEvent event) {
+        if (event.getEntity().level().isClientSide()) return;
+        if (!event.getSource().is(DamageTypes.FALL) && !event.getSource().is(DamageTypes.IN_WALL)) return;
+
+        if (isOrbiting(event.getEntity().getUUID())) {
+            event.setCanceled(true);
+        }
+    }
     public static final Map<UUID, Set<UUID>> orbitingEntities = new HashMap<>();
     public static final Map<UUID, UUID> launchedEntities = new HashMap<>();
+    public static final Map<UUID, List<UUID>> extraFishingHooks = new HashMap<>();
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         Player p =event.player;
@@ -127,6 +147,7 @@ public class ModEvents {
         if(!hasOrbitRod(p))return;
 
         Set<UUID> myOrbiters = orbitingEntities.computeIfAbsent(p.getUUID(), k -> new LinkedHashSet<>());
+        ServerLevel serverLevel = (ServerLevel) p.level();
 
         FishingHook hook = p.fishing;
         if (hook != null) {
@@ -135,9 +156,23 @@ public class ModEvents {
                 myOrbiters.add(e.getUUID());
             }
         }
+
+        // 多勾附魔額外拋出的魚線，各自釣到的東西也要一起環繞
+        List<UUID> multiHooks = extraFishingHooks.get(p.getUUID());
+        if (multiHooks != null) {
+            for (UUID hookId : multiHooks) {
+                Entity hookEntity = serverLevel.getEntity(hookId);
+                if (hookEntity instanceof FishingHook multiHook) {
+                    Entity hooked = multiHook.getHookedIn();
+                    if (hooked != null) {
+                        myOrbiters.add(hooked.getUUID());
+                    }
+                }
+            }
+        }
+
         if (myOrbiters.isEmpty()) return;
 
-        ServerLevel serverLevel = (ServerLevel) p.level();
         /*Random rand = new Random();
         int num1 = rand.nextInt(5, 10);*/
         double radius = 7;
@@ -219,6 +254,68 @@ public class ModEvents {
         entity.hurtMarked = true;
 
         launchedEntities.put(entity.getUUID(), p.getUUID());
+    }
+    @SubscribeEvent
+    public static void onMultiHookCast(PlayerInteractEvent.RightClickItem event) {
+        Player p = event.getEntity();
+        if (p.level().isClientSide()) return;
+
+        ItemStack stack = event.getItemStack();
+        if (!(stack.getItem() instanceof net.minecraft.world.item.FishingRodItem)) return;
+
+        int multiHookLevel = stack.getEnchantmentLevel(enchantmentRegister.MULTI_HOOK.get());
+        if (multiHookLevel <= 1) return;   // 沒附魔或只有1級時，交給原版單線邏輯處理
+
+        ServerLevel serverLevel = (ServerLevel) p.level();
+        event.setCanceled(true);   // 完全接管：一次拋出/收回全部魚線，而非逐次累加
+
+        if (p.fishing == null) {
+            // 一次拋出 N 條魚線 (N = 附魔等級)
+            int speed = net.minecraft.world.item.enchantment.EnchantmentHelper.getFishingSpeedBonus(stack);
+            int luck = net.minecraft.world.item.enchantment.EnchantmentHelper.getFishingLuckBonus(stack);
+
+            // 依玩家面向水平算出一個「右方向量」，讓每條魚線左右錯開，不要疊在同一個點
+            double yawRad = Math.toRadians(p.getYRot());
+            double forwardX = -Math.sin(yawRad);
+            double forwardZ = Math.cos(yawRad);
+            double rightX = forwardZ;
+            double rightZ = -forwardX;
+            double spacing = 1.5;
+
+            List<UUID> hooks = new ArrayList<>();
+            for (int n = 0; n < multiHookLevel; n++) {
+                FishingHook hook = new FishingHook(p, serverLevel, luck, speed);   // 建構子會自動把 p.fishing 指向最新這一支
+                double lateralOffset = (n - (multiHookLevel - 1) / 2.0) * spacing;
+                hook.setPos(hook.getX() + rightX * lateralOffset, hook.getY(), hook.getZ() + rightZ * lateralOffset);
+                serverLevel.addFreshEntity(hook);
+                hooks.add(hook.getUUID());
+            }
+            extraFishingHooks.put(p.getUUID(), hooks);
+
+            serverLevel.playSound(null, p.getX(), p.getY(), p.getZ(),
+                    net.minecraft.sounds.SoundEvents.FISHING_BOBBER_THROW, net.minecraft.sounds.SoundSource.NEUTRAL,
+                    0.5F, 0.4F / (serverLevel.getRandom().nextFloat() * 0.4F + 0.8F));
+            p.awardStat(net.minecraft.stats.Stats.ITEM_USED.get(stack.getItem()));
+            p.gameEvent(net.minecraft.world.level.gameevent.GameEvent.ITEM_INTERACT_START);
+        } else {
+            // 一次收回全部魚線（含每一條各自可能釣到的東西）
+            List<UUID> hooks = extraFishingHooks.remove(p.getUUID());
+            Set<UUID> toRetrieve = hooks != null ? new LinkedHashSet<>(hooks) : new LinkedHashSet<>();
+            toRetrieve.add(p.fishing.getUUID());
+
+            int totalDamage = 0;
+            for (UUID id : toRetrieve) {
+                Entity e = serverLevel.getEntity(id);
+                if (e instanceof FishingHook fishingHook) {
+                    totalDamage += fishingHook.retrieve(stack);
+                }
+            }
+            stack.hurtAndBreak(totalDamage, p, b -> b.broadcastBreakEvent(event.getHand()));
+
+            serverLevel.playSound(null, p.getX(), p.getY(), p.getZ(),
+                    net.minecraft.sounds.SoundEvents.FISHING_BOBBER_RETRIEVE, net.minecraft.sounds.SoundSource.NEUTRAL,
+                    1.0F, 0.4F / (serverLevel.getRandom().nextFloat() * 0.4F + 0.8F));
+        }
     }
     @SubscribeEvent
     public static void onChargingTick(TickEvent.PlayerTickEvent event) {

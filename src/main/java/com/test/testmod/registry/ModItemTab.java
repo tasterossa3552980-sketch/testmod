@@ -53,6 +53,12 @@ public class ModItemTab {
                         EnchantedBookItem.addEnchantment(throwBook, new EnchantmentInstance(enchantmentRegister.THROW.get(), 1));
                         output.accept(throwBook);
 
+                        for (int level = 1; level <= 4; level++) {
+                            ItemStack multiHookBook = new ItemStack(Items.ENCHANTED_BOOK);
+                            EnchantedBookItem.addEnchantment(multiHookBook, new EnchantmentInstance(enchantmentRegister.MULTI_HOOK.get(), level));
+                            output.accept(multiHookBook);
+                        }
+
                     })
                     .build()
 
